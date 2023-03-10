@@ -17,6 +17,8 @@ const CartItem = props => {
   };
 
   const addItemHandler = () => {
+    // Add http request to send data to firebase
+
     console.log('Add item handler');
     /**
      *
