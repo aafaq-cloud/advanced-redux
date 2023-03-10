@@ -6,7 +6,8 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
-import { sendCartData } from './store/cart-slice';
+// import { sendCartData } from './store/cart-slice';
+import { fetchCartData, sendCartData } from './store/cart-actions';
 
 // Middleware
 // Redux Thunk
@@ -41,6 +42,12 @@ function App() {
   // Keep our logic in reducer i.e fat reducer
   // SO THAT IS VERY VERY NICE AND THAT'S A VERY GOOD WAY OF HAVING OUR SIDE EFFECT LOGIG IN A COMPONENT AND KEEPING ALL OUR DATA TRANSFORMATION LOGIC INSIDE OF A REDUCER
   // PROBLEM WITH USEEFFECT
+
+  // When component renders for the first time
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, []);
+
   useEffect(() => {
     // USE sendCartData() as an action creator
     if (isInitial) {
@@ -48,9 +55,12 @@ function App() {
       return;
     }
 
+    // When application loads start fetching data
+
     // Dispatch an action
     // Dispatch function that returns another function
     dispatch(sendCartData(cart));
+    // cart change
   }, [cart]);
 
   return (
