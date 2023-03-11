@@ -43,6 +43,10 @@ function App() {
   // SO THAT IS VERY VERY NICE AND THAT'S A VERY GOOD WAY OF HAVING OUR SIDE EFFECT LOGIG IN A COMPONENT AND KEEPING ALL OUR DATA TRANSFORMATION LOGIC INSIDE OF A REDUCER
   // PROBLEM WITH USEEFFECT
 
+  // PROBLEM: WHEN WE RELOAD PAGE THEN FETCH DATA FROM BACKEND BUT THE SAME TIME SENDING AGAIN
+  // The problem is when we fetching the data once fetching is done, we replace the cart right with that fetched that changes the cart inside of Redux. Now since that cart then changed we trigger this other effect and send the cart data
+  // REASON: When app loads first time the cart data is fetched and it's state changed i.e [cart]
+
   // When component renders for the first time
   useEffect(() => {
     dispatch(fetchCartData());
