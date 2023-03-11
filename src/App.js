@@ -63,7 +63,11 @@ function App() {
 
     // Dispatch an action
     // Dispatch function that returns another function
-    dispatch(sendCartData(cart));
+
+    // Only send data if cart.changed is true if false so if we don't wanna change locally then don't send when we reload the page
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
     // cart change
   }, [cart]);
 

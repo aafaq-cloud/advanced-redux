@@ -18,6 +18,8 @@ const cartSlice = createSlice({
     items: [],
     totalQuantity: 0,
     // totalPrice: 0,
+    // We don't change this if we replace the cart
+    changed: false,
   },
   reducers: {
     // Different functions
@@ -29,6 +31,8 @@ const cartSlice = createSlice({
       // Update the total quantity of cart in state no matter if have an existing item or not
       // So that we udate badge
       state.totalQuantity++;
+
+      state.changed = true;
 
       // Extract item
       // What should happen in there? Well, in there, we should probably extract the item from the action and there keep in mind that it will be the payload property which Redux Toolkit sets for you which contains any extra data you add it to the action. And here, I assume that this extra data is another object describing the item that should be added.
@@ -78,6 +82,8 @@ const cartSlice = createSlice({
     removeItemFromCart(state, action) {
       // So that we udate badge
       state.totalQuantity--;
+
+      state.changed = true;
 
       // We expect that payload is an id of the item
       const id = action.payload;

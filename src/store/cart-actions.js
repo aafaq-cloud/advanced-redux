@@ -27,7 +27,13 @@ export const fetchCartData = () => {
       // Use cart data to set cart
       // Format of firebase
       // Correct structure already
-      dispatch(cartActions.replaceCart(cartData));
+      // dispatch(cartActions.replaceCart(cartData));
+      dispatch(
+        cartActions.replaceCart({
+          items: cartData.items || [],
+          totalQuantity: cartData.totalQuantity,
+        })
+      );
     } catch (err) {
       console.log(err);
 
@@ -73,11 +79,22 @@ export const sendCartData = cart => {
 
     const sendRequest = async () => {
       //   Perform asynchronous code
+      // const response = await fetch(
+      //   'https://react-http-858b3-default-rtdb.firebaseio.com/cart.json',
+      //   {
+      //     method: 'PUT',
+      //     body: JSON.stringify(cart),
+      //   }
+      // );
+
       const response = await fetch(
         'https://react-http-858b3-default-rtdb.firebaseio.com/cart.json',
         {
           method: 'PUT',
-          body: JSON.stringify(cart),
+          body: JSON.stringify({
+            items: cart.items,
+            totalQuantity: cart.totalQuantity,
+          }),
         }
       );
 
